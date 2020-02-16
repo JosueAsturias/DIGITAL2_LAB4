@@ -3,8 +3,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1478 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1478: extern volatile unsigned char TRISB __attribute__((address(0x086)));
 [v _TRISB `Vuc ~T0 @X0 0 e@134 ]
-"37 MasterMain.c
-[; ;MasterMain.c: 37:     SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
+"228
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"39 MasterMain.c
+[; ;MasterMain.c: 39:     SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
 [c E1424 32 33 34 35 36 37 .. ]
 [n E1424 . SPI_MASTER_4 SPI_MASTER_16 SPI_MASTER_64 SPI_MASTER_TMR2 SPI_SLAVE_SS_EN SPI_SLAVE_SS_DI  ]
 [c E1432 128 0 .. ]
@@ -16,22 +19,39 @@ Version 4.0 HI-TECH Software Intermediate Code
 "42 ./SPI.h
 [; ;./SPI.h: 42: void SPI_init(spi_modo modo, spi_sample muestra, spi_clk_idle idle, spi_transmit_edge edge);
 [v _SPI_init `(v ~T0 @X0 0 ef4`E1424`E1432`E1436`E1440 ]
-"43
-[; ;./SPI.h: 43: void SPI_write(uint8_t dato);
-[v _SPI_write `(v ~T0 @X0 0 ef1`uc ]
+"15 ./UART.h
+[; ;./UART.h: 15: uint8_t uart_init(uint16_t baudrate);
+[v _uart_init `(uc ~T0 @X0 0 ef1`ui ]
+"543 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 543:     struct {
+[s S19 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S19 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
+"542
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 542: typedef union {
+[u S18 `S19 1 ]
+[n S18 . . ]
+"553
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 553: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
+[v _PIR1bits `VS18 ~T0 @X0 0 e@12 ]
 [v F1256 `(v ~T0 @X0 1 tf1`ul ]
 "92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
 [v __delay `JF1256 ~T0 @X0 0 e ]
 [p i __delay ]
+"16 ./UART.h
+[; ;./UART.h: 16: char uartRC_Read();
+[v _uartRC_Read `(uc ~T0 @X0 0 e? ]
+"17
+[; ;./UART.h: 17: void uartTX_Write(char dato);
+[v _uartTX_Write `(v ~T0 @X0 0 ef1`uc ]
+"43 ./SPI.h
+[; ;./SPI.h: 43: void SPI_write(uint8_t dato);
+[v _SPI_write `(v ~T0 @X0 0 ef1`uc ]
 "3641 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 3641: extern volatile __bit BF __attribute__((address(0x4A0)));
 [v _BF `Vb ~T0 @X0 0 e@1184 ]
 "843
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 843: extern volatile unsigned char SSPBUF __attribute__((address(0x013)));
 [v _SSPBUF `Vuc ~T0 @X0 0 e@19 ]
-"228
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 228: extern volatile unsigned char PORTB __attribute__((address(0x006)));
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
 "8 MasterMain.c
 [p x FOSC = INTRC_NOCLKOUT ]
 "9
@@ -314,138 +334,173 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _bandera_enviar
 -> -> 0 `i `uc
 ]
+"34
+[; ;MasterMain.c: 34: uint8_t valorSerial = 0;
+[v _valorSerial `uc ~T0 @X0 1 e ]
+[i _valorSerial
+-> -> 0 `i `uc
+]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"35
-[; ;MasterMain.c: 35: void main(void) {
+"36
+[; ;MasterMain.c: 36: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"36
-[; ;MasterMain.c: 36:     TRISB = 0;
-[e = _TRISB -> -> 0 `i `uc ]
 "37
-[; ;MasterMain.c: 37:     SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
-[e ( _SPI_init (4 , , , . `E1424 0 . `E1432 1 . `E1436 0 . `E1440 0 ]
+[; ;MasterMain.c: 37:     TRISB = 0;
+[e = _TRISB -> -> 0 `i `uc ]
+"38
+[; ;MasterMain.c: 38:     PORTB = 0;
+[e = _PORTB -> -> 0 `i `uc ]
 "39
-[; ;MasterMain.c: 39:     while(1){
+[; ;MasterMain.c: 39:     SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
+[e ( _SPI_init (4 , , , . `E1424 0 . `E1432 1 . `E1436 0 . `E1440 0 ]
+"40
+[; ;MasterMain.c: 40:     uart_init(300);
+[e ( _uart_init (1 -> -> 300 `i `ui ]
+"42
+[; ;MasterMain.c: 42:     while(1){
 [e :U 144 ]
 {
-"40
-[; ;MasterMain.c: 40:         switch(order){
-[e $U 147  ]
-{
-"41
-[; ;MasterMain.c: 41:             case 22:
-[e :U 148 ]
-"42
-[; ;MasterMain.c: 42:                 if (!bandera_enviar){
-[e $ ! ! != -> _bandera_enviar `i -> 0 `i 149  ]
-{
 "43
-[; ;MasterMain.c: 43:                     SPI_write(order);
-[e ( _SPI_write (1 _order ]
-"44
-[; ;MasterMain.c: 44:                     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"45
-[; ;MasterMain.c: 45:                     bandera_enviar = 1;
-[e = _bandera_enviar -> -> 1 `i `uc ]
-"46
-[; ;MasterMain.c: 46:                 }
-}
-[e :U 149 ]
-"47
-[; ;MasterMain.c: 47:                 if(BF){
-[e $ ! _BF 150  ]
+[; ;MasterMain.c: 43:         if(PIR1bits.RCIF == 1){
+[e $ ! == -> . . _PIR1bits 0 5 `i -> 1 `i 146  ]
 {
+"44
+[; ;MasterMain.c: 44:             _delay((unsigned long)((50)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"45
+[; ;MasterMain.c: 45:             PORTB = uartRC_Read();
+[e = _PORTB -> ( _uartRC_Read ..  `uc ]
+"46
+[; ;MasterMain.c: 46:         }
+}
+[e :U 146 ]
 "48
-[; ;MasterMain.c: 48:                     recibido_pot1 = SSPBUF;
-[e = _recibido_pot1 _SSPBUF ]
+[; ;MasterMain.c: 48:         uartTX_Write(recibido_pot1);
+[e ( _uartTX_Write (1 -> _recibido_pot1 `uc ]
 "49
-[; ;MasterMain.c: 49:                     order = 66;
-[e = _order -> -> 66 `i `uc ]
-"50
-[; ;MasterMain.c: 50:                     bandera_enviar = 0;
-[e = _bandera_enviar -> -> 0 `i `uc ]
+[; ;MasterMain.c: 49:         uartTX_Write(',');
+[e ( _uartTX_Write (1 -> -> 44 `ui `uc ]
 "51
-[; ;MasterMain.c: 51:                 }
+[; ;MasterMain.c: 51:         uartTX_Write(recibido_pot2);
+[e ( _uartTX_Write (1 -> _recibido_pot2 `uc ]
+"52
+[; ;MasterMain.c: 52:         uartTX_Write('\n');
+[e ( _uartTX_Write (1 -> -> 10 `ui `uc ]
+"53
+[; ;MasterMain.c: 53:         switch(order){
+[e $U 148  ]
+{
+"54
+[; ;MasterMain.c: 54:             case 22:
+[e :U 149 ]
+"55
+[; ;MasterMain.c: 55:                 if (!bandera_enviar){
+[e $ ! ! != -> _bandera_enviar `i -> 0 `i 150  ]
+{
+"56
+[; ;MasterMain.c: 56:                     SPI_write(order);
+[e ( _SPI_write (1 _order ]
+"57
+[; ;MasterMain.c: 57:                     _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"58
+[; ;MasterMain.c: 58:                     bandera_enviar = 1;
+[e = _bandera_enviar -> -> 1 `i `uc ]
+"59
+[; ;MasterMain.c: 59:                 }
 }
 [e :U 150 ]
-"52
-[; ;MasterMain.c: 52:                 break;
-[e $U 146  ]
-"53
-[; ;MasterMain.c: 53:             case 66:
-[e :U 151 ]
-"54
-[; ;MasterMain.c: 54:                 if(!bandera_enviar){
-[e $ ! ! != -> _bandera_enviar `i -> 0 `i 152  ]
-{
-"55
-[; ;MasterMain.c: 55:                     SPI_write(order);
-[e ( _SPI_write (1 _order ]
-"56
-[; ;MasterMain.c: 56:                     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"57
-[; ;MasterMain.c: 57:                     bandera_enviar = 1;
-[e = _bandera_enviar -> -> 1 `i `uc ]
-"58
-[; ;MasterMain.c: 58:                 }
-}
-[e :U 152 ]
-"59
-[; ;MasterMain.c: 59:                 if(BF){
-[e $ ! _BF 153  ]
-{
 "60
-[; ;MasterMain.c: 60:                     recibido_pot2 = SSPBUF;
-[e = _recibido_pot2 _SSPBUF ]
+[; ;MasterMain.c: 60:                 if(BF){
+[e $ ! _BF 151  ]
+{
 "61
-[; ;MasterMain.c: 61:                     order = 22;
-[e = _order -> -> 22 `i `uc ]
+[; ;MasterMain.c: 61:                     recibido_pot1 = SSPBUF;
+[e = _recibido_pot1 _SSPBUF ]
 "62
-[; ;MasterMain.c: 62:                     bandera_enviar = 0;
-[e = _bandera_enviar -> -> 0 `i `uc ]
+[; ;MasterMain.c: 62:                     order = 66;
+[e = _order -> -> 66 `i `uc ]
 "63
-[; ;MasterMain.c: 63:                 }
+[; ;MasterMain.c: 63:                     bandera_enviar = 0;
+[e = _bandera_enviar -> -> 0 `i `uc ]
+"64
+[; ;MasterMain.c: 64:                 }
+}
+[e :U 151 ]
+"65
+[; ;MasterMain.c: 65:                 break;
+[e $U 147  ]
+"66
+[; ;MasterMain.c: 66:             case 66:
+[e :U 152 ]
+"67
+[; ;MasterMain.c: 67:                 if(!bandera_enviar){
+[e $ ! ! != -> _bandera_enviar `i -> 0 `i 153  ]
+{
+"68
+[; ;MasterMain.c: 68:                     SPI_write(order);
+[e ( _SPI_write (1 _order ]
+"69
+[; ;MasterMain.c: 69:                     _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"70
+[; ;MasterMain.c: 70:                     bandera_enviar = 1;
+[e = _bandera_enviar -> -> 1 `i `uc ]
+"71
+[; ;MasterMain.c: 71:                 }
 }
 [e :U 153 ]
-"64
-[; ;MasterMain.c: 64:                 break;
-[e $U 146  ]
-"65
-[; ;MasterMain.c: 65:             default:
-[e :U 154 ]
-"66
-[; ;MasterMain.c: 66:                 recibido_pot1 = 0;
-[e = _recibido_pot1 -> -> 0 `i `uc ]
-"67
-[; ;MasterMain.c: 67:                 recibido_pot2 = 0;
-[e = _recibido_pot2 -> -> 0 `i `uc ]
-"68
-[; ;MasterMain.c: 68:         }
+"72
+[; ;MasterMain.c: 72:                 if(BF){
+[e $ ! _BF 154  ]
+{
+"73
+[; ;MasterMain.c: 73:                     recibido_pot2 = SSPBUF;
+[e = _recibido_pot2 _SSPBUF ]
+"74
+[; ;MasterMain.c: 74:                     order = 22;
+[e = _order -> -> 22 `i `uc ]
+"75
+[; ;MasterMain.c: 75:                     bandera_enviar = 0;
+[e = _bandera_enviar -> -> 0 `i `uc ]
+"76
+[; ;MasterMain.c: 76:                 }
 }
-[e $U 146  ]
+[e :U 154 ]
+"77
+[; ;MasterMain.c: 77:                 break;
+[e $U 147  ]
+"78
+[; ;MasterMain.c: 78:             default:
+[e :U 155 ]
+"79
+[; ;MasterMain.c: 79:                 recibido_pot1 = 0;
+[e = _recibido_pot1 -> -> 0 `i `uc ]
+"80
+[; ;MasterMain.c: 80:                 recibido_pot2 = 0;
+[e = _recibido_pot2 -> -> 0 `i `uc ]
+"81
+[; ;MasterMain.c: 81:         }
+}
+[e $U 147  ]
+[e :U 148 ]
+[e [\ -> _order `i , $ -> 22 `i 149
+ , $ -> 66 `i 152
+ 155 ]
 [e :U 147 ]
-[e [\ -> _order `i , $ -> 22 `i 148
- , $ -> 66 `i 151
- 154 ]
-[e :U 146 ]
-"69
-[; ;MasterMain.c: 69:         PORTB = recibido_pot2;
-[e = _PORTB _recibido_pot2 ]
-"70
-[; ;MasterMain.c: 70:     }
+"83
+[; ;MasterMain.c: 83:     }
 }
 [e :U 143 ]
 [e $U 144  ]
 [e :U 145 ]
-"71
-[; ;MasterMain.c: 71:     return;
+"84
+[; ;MasterMain.c: 84:     return;
 [e $UE 142  ]
-"72
-[; ;MasterMain.c: 72: }
+"85
+[; ;MasterMain.c: 85: }
 [e :UE 142 ]
 }

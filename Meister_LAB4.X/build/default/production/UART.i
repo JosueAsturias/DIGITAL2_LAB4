@@ -2638,7 +2638,7 @@ typedef int16_t intptr_t;
 typedef uint16_t uintptr_t;
 # 14 "./UART.h" 2
 
-uint8_t uartRC_init(uint16_t baudrate);
+uint8_t uart_init(uint16_t baudrate);
 char uartRC_Read();
 void uartTX_Write(char dato);
 void uartTX_Write_Str(char * string);
@@ -2646,7 +2646,7 @@ void uartTX_Write_Str(char * string);
 
 
 
-uint8_t uartRC_init(uint16_t baudrate){
+uint8_t uart_init(uint16_t baudrate){
     uint16_t n;
     n = (4000000 - baudrate*64)/(baudrate*64);
     if (n > 255){
@@ -2657,6 +2657,8 @@ uint8_t uartRC_init(uint16_t baudrate){
         SPBRG = n;
         TXSTAbits.SYNC = 0;
         RCSTAbits.SPEN = 1;
+        TRISC7 = 1;
+        TRISC6 = 0;
         RCSTAbits.CREN = 1;
         TXSTAbits.TXEN = 1;
     }
@@ -2665,15 +2667,12 @@ uint8_t uartRC_init(uint16_t baudrate){
 
 
 char uartRC_Read(){
-    _delay((unsigned long)((5)*(4000000/4000.0)));
-    uint8_t lectura = RCREG;
+    return RCREG;
 }
 
 void uartTX_Write(char dato){
         TXREG = dato;
-        while(TXSTAbits.TRMT == 0){
-            _delay((unsigned long)((500)*(4000000/4000000.0)));
-    }
+        while(!TXSTAbits.TRMT);
 }
 
 void uartTX_Write_Str(char * string){

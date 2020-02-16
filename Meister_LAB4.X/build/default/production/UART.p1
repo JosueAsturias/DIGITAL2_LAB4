@@ -44,11 +44,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1068
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1068: extern volatile RCSTAbits_t RCSTAbits __attribute__((address(0x018)));
 [v _RCSTAbits `VS36 ~T0 @X0 0 e@24 ]
-[v F1256 `(v ~T0 @X0 1 tf1`ul ]
-"92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
-[v __delay `JF1256 ~T0 @X0 0 e ]
-[p i __delay ]
-"1140 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
+"4469
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 4469: extern volatile __bit TRISC7 __attribute__((address(0x43F)));
+[v _TRISC7 `Vb ~T0 @X0 0 e@1087 ]
+"4466
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 4466: extern volatile __bit TRISC6 __attribute__((address(0x43E)));
+[v _TRISC6 `Vb ~T0 @X0 0 e@1086 ]
+"1140
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1140: extern volatile unsigned char RCREG __attribute__((address(0x01A)));
 [v _RCREG `Vuc ~T0 @X0 0 e@26 ]
 "1133
@@ -289,10 +291,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "13 UART.c
-[; ;UART.c: 13: uint8_t uartRC_init(uint16_t baudrate){
-[v _uartRC_init `(uc ~T0 @X0 1 ef1`ui ]
+[; ;UART.c: 13: uint8_t uart_init(uint16_t baudrate){
+[v _uart_init `(uc ~T0 @X0 1 ef1`ui ]
 {
-[e :U _uartRC_init ]
+[e :U _uart_init ]
 [v _baudrate `ui ~T0 @X0 1 r1 ]
 [f ]
 "14
@@ -329,99 +331,93 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;UART.c: 23:         RCSTAbits.SPEN = 1;
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
 "24
-[; ;UART.c: 24:         RCSTAbits.CREN = 1;
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+[; ;UART.c: 24:         TRISC7 = 1;
+[e = _TRISC7 -> -> 1 `i `b ]
 "25
-[; ;UART.c: 25:         TXSTAbits.TXEN = 1;
-[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[; ;UART.c: 25:         TRISC6 = 0;
+[e = _TRISC6 -> -> 0 `i `b ]
 "26
-[; ;UART.c: 26:     }
+[; ;UART.c: 26:         RCSTAbits.CREN = 1;
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+"27
+[; ;UART.c: 27:         TXSTAbits.TXEN = 1;
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+"28
+[; ;UART.c: 28:     }
 }
 [e :U 140 ]
-"27
-[; ;UART.c: 27:     return 0;
+"29
+[; ;UART.c: 29:     return 0;
 [e ) -> -> 0 `i `uc ]
 [e $UE 138  ]
-"28
-[; ;UART.c: 28: }
+"30
+[; ;UART.c: 30: }
 [e :UE 138 ]
 }
-"31
-[; ;UART.c: 31: char uartRC_Read(){
+"33
+[; ;UART.c: 33: char uartRC_Read(){
 [v _uartRC_Read `(uc ~T0 @X0 1 ef ]
 {
 [e :U _uartRC_Read ]
 [f ]
-"32
-[; ;UART.c: 32:     _delay((unsigned long)((5)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"33
-[; ;UART.c: 33:     uint8_t lectura = RCREG;
-[v _lectura `uc ~T0 @X0 1 a ]
-[e = _lectura _RCREG ]
 "34
-[; ;UART.c: 34: }
+[; ;UART.c: 34:     return RCREG;
+[e ) -> _RCREG `uc ]
+[e $UE 141  ]
+"35
+[; ;UART.c: 35: }
 [e :UE 141 ]
 }
-"36
-[; ;UART.c: 36: void uartTX_Write(char dato){
+"37
+[; ;UART.c: 37: void uartTX_Write(char dato){
 [v _uartTX_Write `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _uartTX_Write ]
 [v _dato `uc ~T0 @X0 1 r1 ]
 [f ]
-"37
-[; ;UART.c: 37:         TXREG = dato;
-[e = _TXREG -> _dato `uc ]
 "38
-[; ;UART.c: 38:         while(TXSTAbits.TRMT == 0){
+[; ;UART.c: 38:         TXREG = dato;
+[e = _TXREG -> _dato `uc ]
+"39
+[; ;UART.c: 39:         while(!TXSTAbits.TRMT);
 [e $U 143  ]
 [e :U 144 ]
-{
-"39
-[; ;UART.c: 39:             _delay((unsigned long)((500)*(4000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
-"40
-[; ;UART.c: 40:     }
-}
 [e :U 143 ]
-"38
-[; ;UART.c: 38:         while(TXSTAbits.TRMT == 0){
-[e $ == -> . . _TXSTAbits 0 1 `i -> 0 `i 144  ]
+[e $ ! != -> . . _TXSTAbits 0 1 `i -> 0 `i 144  ]
 [e :U 145 ]
-"41
-[; ;UART.c: 41: }
+"40
+[; ;UART.c: 40: }
 [e :UE 142 ]
 }
-"43
-[; ;UART.c: 43: void uartTX_Write_Str(char * string){
+"42
+[; ;UART.c: 42: void uartTX_Write_Str(char * string){
 [v _uartTX_Write_Str `(v ~T0 @X0 1 ef1`*uc ]
 {
 [e :U _uartTX_Write_Str ]
 [v _string `*uc ~T0 @X0 1 r1 ]
 [f ]
-"44
-[; ;UART.c: 44:     int n;
+"43
+[; ;UART.c: 43:     int n;
 [v _n `i ~T0 @X0 1 a ]
-"45
-[; ;UART.c: 45:     for (n=0; string[n] != '\n'; n++){
+"44
+[; ;UART.c: 44:     for (n=0; string[n] != '\n'; n++){
 {
 [e = _n -> 0 `i ]
 [e $U 150  ]
 [e :U 147 ]
 {
-"46
-[; ;UART.c: 46:         uartTX_Write(string[n]);
+"45
+[; ;UART.c: 45:         uartTX_Write(string[n]);
 [e ( _uartTX_Write (1 *U + _string * -> _n `x -> -> # *U _string `i `x ]
-"47
-[; ;UART.c: 47:     }
+"46
+[; ;UART.c: 46:     }
 }
 [e ++ _n -> 1 `i ]
 [e :U 150 ]
 [e $ != -> *U + _string * -> _n `x -> -> # *U _string `i `x `ui -> 10 `ui 147  ]
 [e :U 148 ]
 }
-"48
-[; ;UART.c: 48: }
+"47
+[; ;UART.c: 47: }
 [e :UE 146 ]
 }

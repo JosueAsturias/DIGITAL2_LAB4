@@ -31,12 +31,25 @@ uint8_t order = 22;
 uint8_t recibido_pot1 = 0;
 uint8_t recibido_pot2 = 0;
 uint8_t bandera_enviar = 0;
+uint8_t valorSerial = 0;
 
 void main(void) {
     TRISB = 0;
+    PORTB = 0;
     SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
+    uart_init(300);
     
     while(1){
+        if(PIR1bits.RCIF == 1){
+            __delay_ms(50);
+            PORTB = uartRC_Read();   
+        }
+//        PORTB = recibido_pot1;
+        uartTX_Write(recibido_pot1);
+        uartTX_Write(',');
+//        __delay_ms(69);
+        uartTX_Write(recibido_pot2);
+        uartTX_Write('\n');
         switch(order){
             case 22:  //pedir pot1
                 if (!bandera_enviar){
@@ -66,7 +79,7 @@ void main(void) {
                 recibido_pot1 = 0;
                 recibido_pot2 = 0;
         }
-       // PORTB = recibido_pot2;
+        
     }
     return;
 }

@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 6 ]
-"37 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\MasterMain.c
+"39 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\MasterMain.c
 [e E1424 . `uc
 SPI_MASTER_4 32
 SPI_MASTER_16 33
@@ -55,21 +55,36 @@ SPI_ACTIVE_TO_IDLE 64
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"35 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\MasterMain.c
+"36 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\MasterMain.c
 [v _main main `(v  1 e 1 0 ]
 "14 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\SPI.c
 [v _SPI_init SPI_init `(v  1 e 1 0 ]
 "28
 [v _SPI_write SPI_write `(v  1 e 1 0 ]
-"36 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\UART.c
+"13 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\UART.c
+[v _uart_init uart_init `(uc  1 e 1 0 ]
+"33
+[v _uartRC_Read uartRC_Read `(uc  1 e 1 0 ]
+"37
 [v _uartTX_Write uartTX_Write `(v  1 e 1 0 ]
 "228 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
 [v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S53 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S61 . 1 `S53 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES61  1 e 1 @12 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
-[s S108 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S149 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -79,18 +94,18 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 SPEN 1 0 :1:7 
 ]
 "1068
-[s S117 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S158 . 1 `uc 1 RCD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S121 . 1 `uc 1 . 1 0 :6:0 
+[s S162 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 nRC8 1 0 :1:6 
 ]
-[s S124 . 1 `uc 1 . 1 0 :6:0 
+[s S165 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[u S127 . 1 `S108 1 . 1 0 `S117 1 . 1 0 `S121 1 . 1 0 `S124 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES127  1 e 1 @24 ]
+[u S168 . 1 `S149 1 . 1 0 `S158 1 . 1 0 `S162 1 . 1 0 `S165 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES168  1 e 1 @24 ]
 "1133
 [v _TXREG TXREG `VEuc  1 e 1 @25 ]
 "1140
@@ -99,7 +114,7 @@ SPI_ACTIVE_TO_IDLE 64
 [v _TRISB TRISB `VEuc  1 e 1 @134 ]
 "2177
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-[s S204 . 1 `uc 1 BF 1 0 :1:0 
+[s S243 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -109,40 +124,40 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 SMP 1 0 :1:7 
 ]
 "2231
-[s S213 . 1 `uc 1 . 1 0 :2:0 
+[s S252 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
-[s S218 . 1 `uc 1 . 1 0 :2:0 
+[s S257 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DATA 1 0 :1:5 
 ]
-[s S224 . 1 `uc 1 . 1 0 :2:0 
+[s S263 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S229 . 1 `uc 1 . 1 0 :2:0 
+[s S268 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S234 . 1 `uc 1 . 1 0 :2:0 
+[s S273 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S239 . 1 `uc 1 . 1 0 :2:0 
+[s S278 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[u S244 . 1 `S204 1 . 1 0 `S213 1 . 1 0 `S218 1 . 1 0 `S224 1 . 1 0 `S229 1 . 1 0 `S234 1 . 1 0 `S239 1 . 1 0 ]
-[v _SSPSTATbits SSPSTATbits `VES244  1 e 1 @148 ]
-[s S70 . 1 `uc 1 TX9D 1 0 :1:0 
+[u S283 . 1 `S243 1 . 1 0 `S252 1 . 1 0 `S257 1 . 1 0 `S263 1 . 1 0 `S268 1 . 1 0 `S273 1 . 1 0 `S278 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES283  1 e 1 @148 ]
+[s S111 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -152,15 +167,15 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 CSRC 1 0 :1:7 
 ]
 "2582
-[s S79 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S120 . 1 `uc 1 TXD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 nTX8 1 0 :1:6 
 ]
-[s S83 . 1 `uc 1 . 1 0 :6:0 
+[s S124 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[u S86 . 1 `S70 1 . 1 0 `S79 1 . 1 0 `S83 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES86  1 e 1 @152 ]
+[u S127 . 1 `S111 1 . 1 0 `S120 1 . 1 0 `S124 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES127  1 e 1 @152 ]
 "2642
 [v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
 "3641
@@ -169,6 +184,10 @@ SPI_ACTIVE_TO_IDLE 64
 [v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
 "4463
 [v _TRISC5 TRISC5 `VEb  1 e 0 @1085 ]
+"4466
+[v _TRISC6 TRISC6 `VEb  1 e 0 @1086 ]
+"4469
+[v _TRISC7 TRISC7 `VEb  1 e 0 @1087 ]
 "30 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\MasterMain.c
 [v _order order `uc  1 e 1 0 ]
 "31
@@ -177,10 +196,45 @@ SPI_ACTIVE_TO_IDLE 64
 [v _recibido_pot2 recibido_pot2 `uc  1 e 1 0 ]
 "33
 [v _bandera_enviar bandera_enviar `uc  1 e 1 0 ]
-"35
+"36
 [v _main main `(v  1 e 1 0 ]
 {
-"72
+"85
+} 0
+"13 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\UART.c
+[v _uart_init uart_init `(uc  1 e 1 0 ]
+{
+"14
+[v uart_init@n n `ui  1 a 2 9 ]
+"13
+[v uart_init@baudrate baudrate `ui  1 p 2 6 ]
+"30
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c90\common\aldiv.c
+[v ___aldiv __aldiv `(l  1 e 4 0 ]
+{
+"10
+[v ___aldiv@quotient quotient `l  1 a 4 2 ]
+"11
+[v ___aldiv@sign sign `uc  1 a 1 1 ]
+[v ___aldiv@counter counter `uc  1 a 1 0 ]
+"5
+[v ___aldiv@divisor divisor `l  1 p 4 0 ]
+[v ___aldiv@dividend dividend `l  1 p 4 4 ]
+"41
+} 0
+"37 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\UART.c
+[v _uartTX_Write uartTX_Write `(v  1 e 1 0 ]
+{
+[v uartTX_Write@dato dato `uc  1 a 1 wreg ]
+[v uartTX_Write@dato dato `uc  1 a 1 wreg ]
+[v uartTX_Write@dato dato `uc  1 a 1 0 ]
+"40
+} 0
+"33
+[v _uartRC_Read uartRC_Read `(uc  1 e 1 0 ]
+{
+"35
 } 0
 "28 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\SPI.c
 [v _SPI_write SPI_write `(v  1 e 1 0 ]

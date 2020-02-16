@@ -2750,7 +2750,7 @@ extern char * ftoa(float f, int * status);
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
 # 14 "./UART.h" 2
 
-uint8_t uartRC_init(uint16_t baudrate);
+uint8_t uart_init(uint16_t baudrate);
 char uartRC_Read();
 void uartTX_Write(char dato);
 void uartTX_Write_Str(char * string);
@@ -2796,12 +2796,25 @@ uint8_t order = 22;
 uint8_t recibido_pot1 = 0;
 uint8_t recibido_pot2 = 0;
 uint8_t bandera_enviar = 0;
+uint8_t valorSerial = 0;
 
 void main(void) {
     TRISB = 0;
+    PORTB = 0;
     SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
+    uart_init(300);
 
     while(1){
+        if(PIR1bits.RCIF == 1){
+            _delay((unsigned long)((50)*(4000000/4000.0)));
+            PORTB = uartRC_Read();
+        }
+
+        uartTX_Write(recibido_pot1);
+        uartTX_Write(',');
+
+        uartTX_Write(recibido_pot2);
+        uartTX_Write('\n');
         switch(order){
             case 22:
                 if (!bandera_enviar){
@@ -2831,7 +2844,7 @@ void main(void) {
                 recibido_pot1 = 0;
                 recibido_pot2 = 0;
         }
-        PORTB = recibido_pot2;
+
     }
     return;
 }
