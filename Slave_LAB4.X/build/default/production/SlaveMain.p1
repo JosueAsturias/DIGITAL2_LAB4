@@ -7,11 +7,35 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3587
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 3587: extern volatile __bit ADIF __attribute__((address(0x66)));
 [v _ADIF `Vb ~T0 @X0 0 e@102 ]
+"1708
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1708:     struct {
+[s S63 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S63 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE ]
+"1707
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1707: typedef union {
+[u S62 `S63 1 ]
+[n S62 . . ]
+"1718
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1718: extern volatile PIE1bits_t PIE1bits __attribute__((address(0x08C)));
+[v _PIE1bits `VS62 ~T0 @X0 0 e@140 ]
 [p mainexit ]
 "16 ./ADC.h
 [; ;./ADC.h: 16: void ADConfig(uint8_t oscFreq,uint8_t canal, unsigned char justificado);
 [v _ADConfig `(v ~T0 @X0 0 ef3`uc`uc`uc ]
-"18
+"45 SlaveMain.c
+[; ;SlaveMain.c: 45:     SPI_init(SPI_SLAVE_SS_DI,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
+[c E1301 32 33 34 35 36 37 .. ]
+[n E1301 . SPI_MASTER_4 SPI_MASTER_16 SPI_MASTER_64 SPI_MASTER_TMR2 SPI_SLAVE_SS_EN SPI_SLAVE_SS_DI  ]
+[c E1309 128 0 .. ]
+[n E1309 . SPI_SAMPLE_END SPI_SAMPLE_MID  ]
+[c E1313 0 16 .. ]
+[n E1313 . SPI_CLK_IDLE_LOW SPI_CLK_IDLE_HIGH  ]
+[c E1317 0 64 .. ]
+[n E1317 . SPI_IDLE_TO_ACTIVE SPI_ACTIVE_TO_IDLE  ]
+"42 ./SPI.h
+[; ;./SPI.h: 42: void SPI_init(spi_modo modo, spi_sample muestra, spi_clk_idle idle, spi_transmit_edge edge);
+[v _SPI_init `(v ~T0 @X0 0 ef4`E1301`E1309`E1313`E1317 ]
+"18 ./ADC.h
 [; ;./ADC.h: 18: uint8_t AnalogRead_8(unsigned char just);
 [v _AnalogRead_8 `(uc ~T0 @X0 0 ef1`uc ]
 "22
@@ -51,17 +75,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 "553
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 553: extern volatile PIR1bits_t PIR1bits __attribute__((address(0x00C)));
 [v _PIR1bits `VS18 ~T0 @X0 0 e@12 ]
-"1708
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1708:     struct {
-[s S63 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S63 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE ]
-"1707
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1707: typedef union {
-[u S62 `S63 1 ]
-[n S62 . . ]
-"1718
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 1718: extern volatile PIE1bits_t PIE1bits __attribute__((address(0x08C)));
-[v _PIE1bits `VS62 ~T0 @X0 0 e@140 ]
+"3641
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 3641: extern volatile __bit BF __attribute__((address(0x4A0)));
+[v _BF `Vb ~T0 @X0 0 e@1184 ]
+"843
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 843: extern volatile unsigned char SSPBUF __attribute__((address(0x013)));
+[v _SSPBUF `Vuc ~T0 @X0 0 e@19 ]
+"43 ./SPI.h
+[; ;./SPI.h: 43: void SPI_write(uint8_t dato);
+[v _SPI_write `(v ~T0 @X0 0 ef1`uc ]
+[v F1256 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
+[v __delay `JF1256 ~T0 @X0 0 e ]
+[p i __delay ]
 "8 SlaveMain.c
 [p x FOSC = INTRC_NOCLKOUT ]
 "9
@@ -320,109 +346,121 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"27 SlaveMain.c
-[; ;SlaveMain.c: 27: uint8_t banderaADC = 0;
-[v _banderaADC `uc ~T0 @X0 1 e ]
-[i _banderaADC
--> -> 0 `i `uc
-]
-"28
-[; ;SlaveMain.c: 28: uint8_t valorADC_CH5 = 0;
+"30 SlaveMain.c
+[; ;SlaveMain.c: 30: uint8_t valorADC_CH5 = 0;
 [v _valorADC_CH5 `uc ~T0 @X0 1 e ]
 [i _valorADC_CH5
 -> -> 0 `i `uc
 ]
-"29
-[; ;SlaveMain.c: 29: uint8_t valorADC_CH0 = 0;
+"31
+[; ;SlaveMain.c: 31: uint8_t valorADC_CH0 = 0;
 [v _valorADC_CH0 `uc ~T0 @X0 1 e ]
 [i _valorADC_CH0
 -> -> 0 `i `uc
 ]
-"30
-[; ;SlaveMain.c: 30: uint8_t instruccion = 0;
+"32
+[; ;SlaveMain.c: 32: uint8_t instruccion = 0;
 [v _instruccion `uc ~T0 @X0 1 e ]
 [i _instruccion
 -> -> 0 `i `uc
 ]
+"33
+[; ;SlaveMain.c: 33: uint8_t bandera_recibido = 0;
+[v _bandera_recibido `uc ~T0 @X0 1 e ]
+[i _bandera_recibido
+-> -> 0 `i `uc
+]
+"34
+[; ;SlaveMain.c: 34: uint8_t banderaADC = 0;
+[v _banderaADC `uc ~T0 @X0 1 e ]
+[i _banderaADC
+-> -> 0 `i `uc
+]
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-"32
-[; ;SlaveMain.c: 32: void __attribute__((picinterrupt(("")))) ISR(){
+"36
+[; ;SlaveMain.c: 36: void __attribute__((picinterrupt(("")))) ISR(){
 [v _ISR `(v ~T1 @X0 1 ef ]
 {
 [e :U _ISR ]
 [f ]
-"33
-[; ;SlaveMain.c: 33:     if(ADIE && ADIF){
+"37
+[; ;SlaveMain.c: 37:     if(ADIE && ADIF){
 [e $ ! && _ADIE _ADIF 139  ]
 {
-"34
-[; ;SlaveMain.c: 34:         banderaADC = 1;
+"38
+[; ;SlaveMain.c: 38:         PIE1bits.ADIE = 0;
+[e = . . _PIE1bits 0 6 -> -> 0 `i `uc ]
+"39
+[; ;SlaveMain.c: 39:         banderaADC = 1;
 [e = _banderaADC -> -> 1 `i `uc ]
-"35
-[; ;SlaveMain.c: 35:     }
+"40
+[; ;SlaveMain.c: 40:     }
 }
 [e :U 139 ]
-"36
-[; ;SlaveMain.c: 36: }
+"41
+[; ;SlaveMain.c: 41: }
 [e :UE 138 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"37
-[; ;SlaveMain.c: 37: void main(void) {
+"43
+[; ;SlaveMain.c: 43: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"38
-[; ;SlaveMain.c: 38:     ADConfig(4,0,'H');
+"44
+[; ;SlaveMain.c: 44:     ADConfig(4,0,'H');
 [e ( _ADConfig (3 , , -> -> 4 `i `uc -> -> 0 `i `uc -> -> 72 `ui `uc ]
-"41
-[; ;SlaveMain.c: 41:     while(1){
+"45
+[; ;SlaveMain.c: 45:     SPI_init(SPI_SLAVE_SS_DI,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
+[e ( _SPI_init (4 , , , . `E1301 5 . `E1309 1 . `E1313 0 . `E1317 0 ]
+"46
+[; ;SlaveMain.c: 46:     while(1){
 [e :U 142 ]
 {
-"42
-[; ;SlaveMain.c: 42:         if (banderaADC){
+"47
+[; ;SlaveMain.c: 47:         if(banderaADC){
 [e $ ! != -> _banderaADC `i -> 0 `i 144  ]
 {
-"43
-[; ;SlaveMain.c: 43:             switch (ADCON0bits.CHS){
+"48
+[; ;SlaveMain.c: 48:             switch (ADCON0bits.CHS){
 [e $U 146  ]
 {
-"44
-[; ;SlaveMain.c: 44:                 case 5:
-[e :U 147 ]
-"45
-[; ;SlaveMain.c: 45:                     valorADC_CH5 = AnalogRead_8('H');
-[e = _valorADC_CH5 ( _AnalogRead_8 (1 -> -> 72 `ui `uc ]
-"46
-[; ;SlaveMain.c: 46:                     ADC_CHselect(0);
-[e ( _ADC_CHselect (1 -> -> 0 `i `uc ]
-"47
-[; ;SlaveMain.c: 47:                     break;
-[e $U 145  ]
-"48
-[; ;SlaveMain.c: 48:                 case 0:
-[e :U 148 ]
 "49
-[; ;SlaveMain.c: 49:                     valorADC_CH0 = AnalogRead_8('H');
-[e = _valorADC_CH0 ( _AnalogRead_8 (1 -> -> 72 `ui `uc ]
+[; ;SlaveMain.c: 49:                 case 5:
+[e :U 147 ]
 "50
-[; ;SlaveMain.c: 50:                     ADC_CHselect(5);
-[e ( _ADC_CHselect (1 -> -> 5 `i `uc ]
+[; ;SlaveMain.c: 50:                     valorADC_CH5 = AnalogRead_8('H');
+[e = _valorADC_CH5 ( _AnalogRead_8 (1 -> -> 72 `ui `uc ]
 "51
-[; ;SlaveMain.c: 51:                     break;
-[e $U 145  ]
+[; ;SlaveMain.c: 51:                     ADC_CHselect(0);
+[e ( _ADC_CHselect (1 -> -> 0 `i `uc ]
 "52
-[; ;SlaveMain.c: 52:                 default:
-[e :U 149 ]
+[; ;SlaveMain.c: 52:                     break;
+[e $U 145  ]
 "53
-[; ;SlaveMain.c: 53:                     valorADC_CH0 = 0;
-[e = _valorADC_CH0 -> -> 0 `i `uc ]
+[; ;SlaveMain.c: 53:                 case 0:
+[e :U 148 ]
 "54
-[; ;SlaveMain.c: 54:                     valorADC_CH5 = 0;
-[e = _valorADC_CH5 -> -> 0 `i `uc ]
+[; ;SlaveMain.c: 54:                     valorADC_CH0 = AnalogRead_8('H');
+[e = _valorADC_CH0 ( _AnalogRead_8 (1 -> -> 72 `ui `uc ]
 "55
-[; ;SlaveMain.c: 55:             }
+[; ;SlaveMain.c: 55:                     ADC_CHselect(5);
+[e ( _ADC_CHselect (1 -> -> 5 `i `uc ]
+"56
+[; ;SlaveMain.c: 56:                     break;
+[e $U 145  ]
+"57
+[; ;SlaveMain.c: 57:                 default:
+[e :U 149 ]
+"58
+[; ;SlaveMain.c: 58:                     valorADC_CH0 = 0;
+[e = _valorADC_CH0 -> -> 0 `i `uc ]
+"59
+[; ;SlaveMain.c: 59:                     valorADC_CH5 = 0;
+[e = _valorADC_CH5 -> -> 0 `i `uc ]
+"60
+[; ;SlaveMain.c: 60:             }
 }
 [e $U 145  ]
 [e :U 146 ]
@@ -430,32 +468,103 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 0 `i 148
  149 ]
 [e :U 145 ]
-"56
-[; ;SlaveMain.c: 56:             banderaADC = 0;
+"62
+[; ;SlaveMain.c: 62:             banderaADC = 0;
 [e = _banderaADC -> -> 0 `i `uc ]
-"57
-[; ;SlaveMain.c: 57:             PIR1bits.ADIF = 0;
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-"58
-[; ;SlaveMain.c: 58:             PIE1bits.ADIE = 1;
+"63
+[; ;SlaveMain.c: 63:             PIE1bits.ADIE = 1;
 [e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
-"59
-[; ;SlaveMain.c: 59:             ADCON0bits.GO_nDONE = 1;
+"64
+[; ;SlaveMain.c: 64:             PIR1bits.ADIF = 0;
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+"65
+[; ;SlaveMain.c: 65:             ADCON0bits.GO_nDONE = 1;
 [e = . . _ADCON0bits 0 1 -> -> 1 `i `uc ]
-"60
-[; ;SlaveMain.c: 60:         }
+"66
+[; ;SlaveMain.c: 66:         }
 }
 [e :U 144 ]
-"61
-[; ;SlaveMain.c: 61:     }
+"68
+[; ;SlaveMain.c: 68:         if(BF){
+[e $ ! _BF 150  ]
+{
+"69
+[; ;SlaveMain.c: 69:             instruccion = SSPBUF;
+[e = _instruccion _SSPBUF ]
+"70
+[; ;SlaveMain.c: 70:             bandera_recibido = 1;
+[e = _bandera_recibido -> -> 1 `i `uc ]
+"71
+[; ;SlaveMain.c: 71:         }
+}
+[e :U 150 ]
+"73
+[; ;SlaveMain.c: 73:         if(bandera_recibido){
+[e $ ! != -> _bandera_recibido `i -> 0 `i 151  ]
+{
+"74
+[; ;SlaveMain.c: 74:             switch (instruccion){
+[e $U 153  ]
+{
+"75
+[; ;SlaveMain.c: 75:                 case 22:
+[e :U 154 ]
+"76
+[; ;SlaveMain.c: 76:                     SPI_write(valorADC_CH0);
+[e ( _SPI_write (1 _valorADC_CH0 ]
+"77
+[; ;SlaveMain.c: 77:                     _delay((unsigned long)((500)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"78
+[; ;SlaveMain.c: 78:                     break;
+[e $U 152  ]
+"79
+[; ;SlaveMain.c: 79:                 case 66:
+[e :U 155 ]
+"80
+[; ;SlaveMain.c: 80:                     SPI_write(valorADC_CH5);
+[e ( _SPI_write (1 _valorADC_CH5 ]
+"81
+[; ;SlaveMain.c: 81:                     _delay((unsigned long)((500)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"82
+[; ;SlaveMain.c: 82:                     break;
+[e $U 152  ]
+"83
+[; ;SlaveMain.c: 83:                 default:
+[e :U 156 ]
+"84
+[; ;SlaveMain.c: 84:                     SPI_write(0);
+[e ( _SPI_write (1 -> -> 0 `i `uc ]
+"85
+[; ;SlaveMain.c: 85:                     _delay((unsigned long)((500)*(4000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 4000000 `l `d .4000000.0 `ul ]
+"86
+[; ;SlaveMain.c: 86:             }
+}
+[e $U 152  ]
+[e :U 153 ]
+[e [\ -> _instruccion `i , $ -> 22 `i 154
+ , $ -> 66 `i 155
+ 156 ]
+[e :U 152 ]
+"87
+[; ;SlaveMain.c: 87:             bandera_recibido = 0;
+[e = _bandera_recibido -> -> 0 `i `uc ]
+"88
+[; ;SlaveMain.c: 88:         }
+}
+[e :U 151 ]
+"89
+[; ;SlaveMain.c: 89:     }
 }
 [e :U 141 ]
 [e $U 142  ]
 [e :U 143 ]
-"62
-[; ;SlaveMain.c: 62:     return;
+"90
+[; ;SlaveMain.c: 90:     return;
 [e $UE 140  ]
-"63
-[; ;SlaveMain.c: 63: }
+"91
+[; ;SlaveMain.c: 91: }
 [e :UE 140 ]
 }

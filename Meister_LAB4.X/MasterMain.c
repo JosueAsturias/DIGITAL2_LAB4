@@ -23,15 +23,50 @@
 
 #include <xc.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "UART.h"
-
-uint8_t instruccion = 0;
+#include "SPI.h"
+#define _XTAL_FREQ 4000000
+uint8_t order = 22;
+uint8_t recibido_pot1 = 0;
+uint8_t recibido_pot2 = 0;
+uint8_t bandera_enviar = 0;
 
 void main(void) {
     TRISB = 0;
+    SPI_init(SPI_MASTER_4,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
     
     while(1){
-        
+        switch(order){
+            case 22:  //pedir pot1
+                if (!bandera_enviar){
+                    SPI_write(order);
+                    __delay_ms(10);
+                    bandera_enviar = 1;
+                }
+                if(BF){
+                    recibido_pot1 = SSPBUF;
+                    order = 66;
+                    bandera_enviar = 0;
+                }
+                break;
+            case 66:  //pedir pot2
+                if(!bandera_enviar){
+                    SPI_write(order);
+                    __delay_ms(10);
+                    bandera_enviar = 1;
+                }
+                if(BF){
+                    recibido_pot2 = SSPBUF;
+                    order = 22;
+                    bandera_enviar = 0;
+                }
+                break;
+            default:
+                recibido_pot1 = 0;
+                recibido_pot2 = 0;
+        }
+       // PORTB = recibido_pot2;
     }
     return;
 }

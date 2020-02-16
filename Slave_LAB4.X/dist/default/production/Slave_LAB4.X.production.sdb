@@ -3,6 +3,27 @@
 [d edition pro ]
 [d chip 16F887 ]
 [d frameptr 6 ]
+"45 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
+[e E1301 . `uc
+SPI_MASTER_4 32
+SPI_MASTER_16 33
+SPI_MASTER_64 34
+SPI_MASTER_TMR2 35
+SPI_SLAVE_SS_EN 36
+SPI_SLAVE_SS_DI 37
+]
+[e E1309 . `uc
+SPI_SAMPLE_END 128
+SPI_SAMPLE_MID 0
+]
+[e E1313 . `uc
+SPI_CLK_IDLE_LOW 0
+SPI_CLK_IDLE_HIGH 16
+]
+[e E1317 . `uc
+SPI_IDLE_TO_ACTIVE 0
+SPI_ACTIVE_TO_IDLE 64
+]
 "14 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SPI.c
 [e E1292 . `uc
 SPI_MASTER_4 32
@@ -38,11 +59,15 @@ SPI_ACTIVE_TO_IDLE 64
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"32 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
+"36 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"37
+"43
 [v _main main `(v  1 e 1 0 ]
-[s S275 . 1 `uc 1 RBIF 1 0 :1:0 
+"14 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SPI.c
+[v _SPI_init SPI_init `(v  1 e 1 0 ]
+"28
+[v _SPI_write SPI_write `(v  1 e 1 0 ]
+[s S313 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INTF 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -52,14 +77,14 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 GIE 1 0 :1:7 
 ]
 "482 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f887.h
-[s S284 . 1 `uc 1 . 1 0 :2:0 
+[s S322 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 TMR0IE 1 0 :1:5 
 ]
-[u S289 . 1 `S275 1 . 1 0 `S284 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES289  1 e 1 @11 ]
-[s S87 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S327 . 1 `S313 1 . 1 0 `S322 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES327  1 e 1 @11 ]
+[s S130 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -68,21 +93,21 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 ADIF 1 0 :1:6 
 ]
 "553
-[u S95 . 1 `S87 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES95  1 e 1 @12 ]
+[u S138 . 1 `S130 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES138  1 e 1 @12 ]
 "843
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "850
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
 "1238
 [v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
-[s S41 . 1 `uc 1 ADON 1 0 :1:0 
+[s S84 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 `uc 1 ADCS 1 0 :2:6 
 ]
 "1276
-[s S46 . 1 `uc 1 . 1 0 :1:0 
+[s S89 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -91,15 +116,15 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 ADCS0 1 0 :1:6 
 `uc 1 ADCS1 1 0 :1:7 
 ]
-[s S55 . 1 `uc 1 . 1 0 :1:0 
+[s S98 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S58 . 1 `uc 1 . 1 0 :1:0 
+[s S101 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[u S61 . 1 `S41 1 . 1 0 `S46 1 . 1 0 `S55 1 . 1 0 `S58 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES61  1 e 1 @31 ]
-[s S198 . 1 `uc 1 TRISA0 1 0 :1:0 
+[u S104 . 1 `S84 1 . 1 0 `S89 1 . 1 0 `S98 1 . 1 0 `S101 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES104  1 e 1 @31 ]
+[s S236 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -109,17 +134,17 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "1433
-[u S207 . 1 `S198 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES207  1 e 1 @133 ]
-[s S240 . 1 `uc 1 TRISE0 1 0 :1:0 
+[u S245 . 1 `S236 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES245  1 e 1 @133 ]
+[s S278 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 TRISE3 1 0 :1:3 
 ]
 "1677
-[u S245 . 1 `S240 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES245  1 e 1 @137 ]
-[s S106 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[u S283 . 1 `S278 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES283  1 e 1 @137 ]
+[s S24 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -128,11 +153,11 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 ADIE 1 0 :1:6 
 ]
 "1718
-[u S114 . 1 `S106 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES114  1 e 1 @140 ]
+[u S32 . 1 `S24 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES32  1 e 1 @140 ]
 "2177
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-[s S379 . 1 `uc 1 BF 1 0 :1:0 
+[s S413 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -142,51 +167,51 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 SMP 1 0 :1:7 
 ]
 "2231
-[s S388 . 1 `uc 1 . 1 0 :2:0 
+[s S422 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
-[s S393 . 1 `uc 1 . 1 0 :2:0 
+[s S427 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DATA 1 0 :1:5 
 ]
-[s S399 . 1 `uc 1 . 1 0 :2:0 
+[s S433 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S404 . 1 `uc 1 . 1 0 :2:0 
+[s S438 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S409 . 1 `uc 1 . 1 0 :2:0 
+[s S443 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S414 . 1 `uc 1 . 1 0 :2:0 
+[s S448 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[u S419 . 1 `S379 1 . 1 0 `S388 1 . 1 0 `S393 1 . 1 0 `S399 1 . 1 0 `S404 1 . 1 0 `S409 1 . 1 0 `S414 1 . 1 0 ]
-[v _SSPSTATbits SSPSTATbits `VES419  1 e 1 @148 ]
+[u S453 . 1 `S413 1 . 1 0 `S422 1 . 1 0 `S427 1 . 1 0 `S433 1 . 1 0 `S438 1 . 1 0 `S443 1 . 1 0 `S448 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES453  1 e 1 @148 ]
 "2970
 [v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
-[s S183 . 1 `uc 1 . 1 0 :4:0 
+[s S221 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "2991
-[u S189 . 1 `S183 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES189  1 e 1 @159 ]
-[s S219 . 1 `uc 1 ANS0 1 0 :1:0 
+[u S227 . 1 `S221 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES227  1 e 1 @159 ]
+[s S257 . 1 `uc 1 ANS0 1 0 :1:0 
 `uc 1 ANS1 1 0 :1:1 
 `uc 1 ANS2 1 0 :1:2 
 `uc 1 ANS3 1 0 :1:3 
@@ -196,26 +221,52 @@ SPI_ACTIVE_TO_IDLE 64
 `uc 1 ANS7 1 0 :1:7 
 ]
 "3404
-[u S228 . 1 `S219 1 . 1 0 ]
-[v _ANSELbits ANSELbits `VES228  1 e 1 @392 ]
+[u S266 . 1 `S257 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES266  1 e 1 @392 ]
 "3584
 [v _ADIE ADIE `VEb  1 e 0 @1126 ]
 "3587
 [v _ADIF ADIF `VEb  1 e 0 @102 ]
+"3641
+[v _BF BF `VEb  1 e 0 @1184 ]
 "4457
 [v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
 "4463
 [v _TRISC5 TRISC5 `VEb  1 e 0 @1085 ]
-"27 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
-[v _banderaADC banderaADC `uc  1 e 1 0 ]
-"28
+"30 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
 [v _valorADC_CH5 valorADC_CH5 `uc  1 e 1 0 ]
-"29
+"31
 [v _valorADC_CH0 valorADC_CH0 `uc  1 e 1 0 ]
-"37
+"32
+[v _instruccion instruccion `uc  1 e 1 0 ]
+"33
+[v _bandera_recibido bandera_recibido `uc  1 e 1 0 ]
+"34
+[v _banderaADC banderaADC `uc  1 e 1 0 ]
+"43
 [v _main main `(v  1 e 1 0 ]
 {
-"63
+"91
+} 0
+"28 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SPI.c
+[v _SPI_write SPI_write `(v  1 e 1 0 ]
+{
+[v SPI_write@dato dato `uc  1 a 1 wreg ]
+[v SPI_write@dato dato `uc  1 a 1 wreg ]
+[v SPI_write@dato dato `uc  1 a 1 2 ]
+"30
+} 0
+"14
+[v _SPI_init SPI_init `(v  1 e 1 0 ]
+{
+[v SPI_init@modo modo `E1292  1 a 1 wreg ]
+[v SPI_init@modo modo `E1292  1 a 1 wreg ]
+[v SPI_init@muestra muestra `E1300  1 p 1 2 ]
+[v SPI_init@idle idle `E1304  1 p 1 3 ]
+"15
+[v SPI_init@edge edge `E1308  1 p 1 4 ]
+[v SPI_init@modo modo `E1292  1 a 1 5 ]
+"26
 } 0
 "97 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\ADC.c
 [v _AnalogRead_8 AnalogRead_8 `(uc  1 e 1 0 ]
@@ -246,8 +297,8 @@ SPI_ACTIVE_TO_IDLE 64
 [v ADC_CHselect@canal canal `uc  1 a 1 4 ]
 "167
 } 0
-"32 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
+"36 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Slave_LAB4.X\SlaveMain.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"36
+"41
 } 0

@@ -1,2 +1,4 @@
 build/default/production/MasterMain.p1:  \
-MasterMain.c 
+MasterMain.c  \
+UART.h  \
+SPI.h 

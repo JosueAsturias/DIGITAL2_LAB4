@@ -1,4 +1,4 @@
-# 1 "SlaveMain.c"
+# 1 "UART.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,28 +6,12 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "SlaveMain.c" 2
+# 1 "UART.c" 2
 
 
 
 
 
-
-
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = OFF
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
 
 
 
@@ -2515,8 +2499,10 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 24 "SlaveMain.c" 2
+# 9 "UART.c" 2
 
+# 1 "./UART.h" 1
+# 14 "./UART.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 3
 typedef signed char int8_t;
@@ -2650,119 +2636,49 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 25 "SlaveMain.c" 2
+# 14 "./UART.h" 2
 
-# 1 "./ADC.h" 1
-# 14 "./ADC.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
-# 14 "./ADC.h" 2
-
-
-void ADConfig(uint8_t oscFreq,uint8_t canal, unsigned char justificado);
-
-uint8_t AnalogRead_8(unsigned char just);
-
-void ADCinit();
-
-void ADC_CHselect(uint8_t canal);
-# 26 "SlaveMain.c" 2
-
-# 1 "./SPI.h" 1
-# 16 "./SPI.h"
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c90\\stdint.h" 1 3
-# 16 "./SPI.h" 2
-
-
-typedef enum {
-    SPI_MASTER_4 = 0b00100000,
-    SPI_MASTER_16 = 0b00100001,
-    SPI_MASTER_64 = 0b00100010,
-    SPI_MASTER_TMR2 = 0b00100011,
-    SPI_SLAVE_SS_EN = 0b00100100,
-    SPI_SLAVE_SS_DI = 0b00100101
-}spi_modo;
-
-typedef enum{
-    SPI_SAMPLE_END = 0b10000000,
-    SPI_SAMPLE_MID = 0b00000000
-}spi_sample;
-
-typedef enum{
-    SPI_CLK_IDLE_LOW = 0b00000000,
-    SPI_CLK_IDLE_HIGH = 0b00010000
-}spi_clk_idle;
-
-typedef enum{
-    SPI_IDLE_TO_ACTIVE = 0b00000000,
-    SPI_ACTIVE_TO_IDLE = 0b01000000
-}spi_transmit_edge;
-
-void SPI_init(spi_modo modo, spi_sample muestra, spi_clk_idle idle, spi_transmit_edge edge);
-void SPI_write(uint8_t dato);
-uint8_t SPI_read();
-# 27 "SlaveMain.c" 2
+uint8_t uartRC_init(uint16_t baudrate);
+char uartRC_Read();
+void uartTX_Write(char dato);
+void uartTX_Write_Str(char * string);
+# 10 "UART.c" 2
 
 
 
-uint8_t valorADC_CH5 = 0;
-uint8_t valorADC_CH0 = 0;
-uint8_t instruccion = 0;
-uint8_t bandera_recibido = 0;
-uint8_t banderaADC = 0;
+uint8_t uartRC_init(uint16_t baudrate){
+    uint16_t n;
+    n = (4000000 - baudrate*64)/(baudrate*64);
+    if (n > 255){
+        n = (4000000 - baudrate*16)/(baudrate*16);
+        TXSTAbits.BRGH = 1;
+    }
+    if (n < 256){
+        SPBRG = n;
+        TXSTAbits.SYNC = 0;
+        RCSTAbits.SPEN = 1;
+        RCSTAbits.CREN = 1;
+        TXSTAbits.TXEN = 1;
+    }
+    return 0;
+}
 
-void __attribute__((picinterrupt(("")))) ISR(){
-    if(ADIE && ADIF){
-        PIE1bits.ADIE = 0;
-        banderaADC = 1;
+
+char uartRC_Read(){
+    _delay((unsigned long)((5)*(4000000/4000.0)));
+    uint8_t lectura = RCREG;
+}
+
+void uartTX_Write(char dato){
+        TXREG = dato;
+        while(TXSTAbits.TRMT == 0){
+            _delay((unsigned long)((500)*(4000000/4000000.0)));
     }
 }
 
-void main(void) {
-    ADConfig(4,0,'H');
-    SPI_init(SPI_SLAVE_SS_DI,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
-    while(1){
-        if(banderaADC){
-            switch (ADCON0bits.CHS){
-                case 5:
-                    valorADC_CH5 = AnalogRead_8('H');
-                    ADC_CHselect(0);
-                    break;
-                case 0:
-                    valorADC_CH0 = AnalogRead_8('H');
-                    ADC_CHselect(5);
-                    break;
-                default:
-                    valorADC_CH0 = 0;
-                    valorADC_CH5 = 0;
-            }
-
-            banderaADC = 0;
-            PIE1bits.ADIE = 1;
-            PIR1bits.ADIF = 0;
-            ADCON0bits.GO_nDONE = 1;
-        }
-
-        if(BF){
-            instruccion = SSPBUF;
-            bandera_recibido = 1;
-        }
-
-        if(bandera_recibido){
-            switch (instruccion){
-                case 22:
-                    SPI_write(valorADC_CH0);
-                    _delay((unsigned long)((500)*(4000000/4000000.0)));
-                    break;
-                case 66:
-                    SPI_write(valorADC_CH5);
-                    _delay((unsigned long)((500)*(4000000/4000000.0)));
-                    break;
-                default:
-                    SPI_write(0);
-                    _delay((unsigned long)((500)*(4000000/4000000.0)));
-            }
-            bandera_recibido = 0;
-        }
+void uartTX_Write_Str(char * string){
+    int n;
+    for (n=0; string[n] != '\n'; n++){
+        uartTX_Write(string[n]);
     }
-    return;
 }

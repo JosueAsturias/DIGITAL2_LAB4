@@ -24,21 +24,27 @@
 #include <xc.h>
 #include <stdint.h>
 #include "ADC.h"
-uint8_t banderaADC = 0;
+#include "SPI.h"
+#define _XTAL_FREQ 4000000
+
 uint8_t valorADC_CH5 = 0;
 uint8_t valorADC_CH0 = 0;
 uint8_t instruccion = 0;
+uint8_t bandera_recibido = 0;
+uint8_t banderaADC = 0;
 
 void __interrupt() ISR(){
     if(ADIE && ADIF){
+        PIE1bits.ADIE = 0;
         banderaADC = 1;
     }
 }
+
 void main(void) {
     ADConfig(4,0,'H');
     SPI_init(SPI_SLAVE_SS_DI,SPI_SAMPLE_MID,SPI_CLK_IDLE_LOW,SPI_IDLE_TO_ACTIVE);
     while(1){
-        if (banderaADC){
+        if(banderaADC){                // ADC
             switch (ADCON0bits.CHS){
                 case 5:
                     valorADC_CH5 = AnalogRead_8('H');
@@ -52,12 +58,34 @@ void main(void) {
                     valorADC_CH0 = 0;
                     valorADC_CH5 = 0; 
             }
+//            __delay_ms(6);
             banderaADC = 0;
-            PIR1bits.ADIF = 0;
             PIE1bits.ADIE = 1;
+            PIR1bits.ADIF = 0;
             ADCON0bits.GO_nDONE = 1;
         }
-        //enviar /recibir
+        
+        if(BF){                         // si recibio algo
+            instruccion = SSPBUF;
+            bandera_recibido = 1;
+        }
+        
+        if(bandera_recibido){           //mandar peticion
+            switch (instruccion){
+                case 22:
+                    SPI_write(valorADC_CH0);// mandar pot2
+                    __delay_us(500);
+                    break;
+                case 66:
+                    SPI_write(valorADC_CH5);//mandar pot1
+                    __delay_us(500);
+                    break;
+                default:
+                    SPI_write(0);
+                    __delay_us(500);
+            }
+            bandera_recibido = 0;
+        }
     }
     return;
 }
