@@ -380,15 +380,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "48
 [; ;MasterMain.c: 48:         uartTX_Write(recibido_pot1);
 [e ( _uartTX_Write (1 -> _recibido_pot1 `uc ]
-"49
-[; ;MasterMain.c: 49:         uartTX_Write(',');
-[e ( _uartTX_Write (1 -> -> 44 `ui `uc ]
 "51
 [; ;MasterMain.c: 51:         uartTX_Write(recibido_pot2);
 [e ( _uartTX_Write (1 -> _recibido_pot2 `uc ]
-"52
-[; ;MasterMain.c: 52:         uartTX_Write('\n');
-[e ( _uartTX_Write (1 -> -> 10 `ui `uc ]
 "53
 [; ;MasterMain.c: 53:         switch(order){
 [e $U 148  ]
@@ -421,86 +415,108 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;MasterMain.c: 61:                     recibido_pot1 = SSPBUF;
 [e = _recibido_pot1 _SSPBUF ]
 "62
-[; ;MasterMain.c: 62:                     order = 66;
-[e = _order -> -> 66 `i `uc ]
+[; ;MasterMain.c: 62:                     if (recibido_pot1 == 10){
+[e $ ! == -> _recibido_pot1 `i -> 10 `i 152  ]
+{
 "63
-[; ;MasterMain.c: 63:                     bandera_enviar = 0;
-[e = _bandera_enviar -> -> 0 `i `uc ]
+[; ;MasterMain.c: 63:                         recibido_pot1 = 9;
+[e = _recibido_pot1 -> -> 9 `i `uc ]
 "64
-[; ;MasterMain.c: 64:                 }
+[; ;MasterMain.c: 64:                     }
+}
+[e :U 152 ]
+"65
+[; ;MasterMain.c: 65:                     order = 66;
+[e = _order -> -> 66 `i `uc ]
+"66
+[; ;MasterMain.c: 66:                     bandera_enviar = 0;
+[e = _bandera_enviar -> -> 0 `i `uc ]
+"67
+[; ;MasterMain.c: 67:                 }
 }
 [e :U 151 ]
-"65
-[; ;MasterMain.c: 65:                 break;
-[e $U 147  ]
-"66
-[; ;MasterMain.c: 66:             case 66:
-[e :U 152 ]
-"67
-[; ;MasterMain.c: 67:                 if(!bandera_enviar){
-[e $ ! ! != -> _bandera_enviar `i -> 0 `i 153  ]
-{
 "68
-[; ;MasterMain.c: 68:                     SPI_write(order);
-[e ( _SPI_write (1 _order ]
+[; ;MasterMain.c: 68:                 break;
+[e $U 147  ]
 "69
-[; ;MasterMain.c: 69:                     _delay((unsigned long)((10)*(4000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
-"70
-[; ;MasterMain.c: 70:                     bandera_enviar = 1;
-[e = _bandera_enviar -> -> 1 `i `uc ]
-"71
-[; ;MasterMain.c: 71:                 }
-}
+[; ;MasterMain.c: 69:             case 66:
 [e :U 153 ]
-"72
-[; ;MasterMain.c: 72:                 if(BF){
-[e $ ! _BF 154  ]
+"70
+[; ;MasterMain.c: 70:                 if(!bandera_enviar){
+[e $ ! ! != -> _bandera_enviar `i -> 0 `i 154  ]
 {
+"71
+[; ;MasterMain.c: 71:                     SPI_write(order);
+[e ( _SPI_write (1 _order ]
+"72
+[; ;MasterMain.c: 72:                     _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
 "73
-[; ;MasterMain.c: 73:                     recibido_pot2 = SSPBUF;
-[e = _recibido_pot2 _SSPBUF ]
+[; ;MasterMain.c: 73:                     bandera_enviar = 1;
+[e = _bandera_enviar -> -> 1 `i `uc ]
 "74
-[; ;MasterMain.c: 74:                     order = 22;
-[e = _order -> -> 22 `i `uc ]
-"75
-[; ;MasterMain.c: 75:                     bandera_enviar = 0;
-[e = _bandera_enviar -> -> 0 `i `uc ]
-"76
-[; ;MasterMain.c: 76:                 }
+[; ;MasterMain.c: 74:                 }
 }
 [e :U 154 ]
+"75
+[; ;MasterMain.c: 75:                 if(BF){
+[e $ ! _BF 155  ]
+{
+"76
+[; ;MasterMain.c: 76:                     recibido_pot2 = SSPBUF;
+[e = _recibido_pot2 _SSPBUF ]
 "77
-[; ;MasterMain.c: 77:                 break;
-[e $U 147  ]
+[; ;MasterMain.c: 77:                     if (recibido_pot2 == 10){
+[e $ ! == -> _recibido_pot2 `i -> 10 `i 156  ]
+{
 "78
-[; ;MasterMain.c: 78:             default:
-[e :U 155 ]
+[; ;MasterMain.c: 78:                         recibido_pot2 = 9;
+[e = _recibido_pot2 -> -> 9 `i `uc ]
 "79
-[; ;MasterMain.c: 79:                 recibido_pot1 = 0;
-[e = _recibido_pot1 -> -> 0 `i `uc ]
+[; ;MasterMain.c: 79:                     }
+}
+[e :U 156 ]
 "80
-[; ;MasterMain.c: 80:                 recibido_pot2 = 0;
-[e = _recibido_pot2 -> -> 0 `i `uc ]
+[; ;MasterMain.c: 80:                     order = 22;
+[e = _order -> -> 22 `i `uc ]
 "81
-[; ;MasterMain.c: 81:         }
+[; ;MasterMain.c: 81:                     bandera_enviar = 0;
+[e = _bandera_enviar -> -> 0 `i `uc ]
+"82
+[; ;MasterMain.c: 82:                 }
+}
+[e :U 155 ]
+"83
+[; ;MasterMain.c: 83:                 break;
+[e $U 147  ]
+"84
+[; ;MasterMain.c: 84:             default:
+[e :U 157 ]
+"85
+[; ;MasterMain.c: 85:                 recibido_pot1 = 0;
+[e = _recibido_pot1 -> -> 0 `i `uc ]
+"86
+[; ;MasterMain.c: 86:                 recibido_pot2 = 0;
+[e = _recibido_pot2 -> -> 0 `i `uc ]
+"87
+[; ;MasterMain.c: 87:         }
 }
 [e $U 147  ]
 [e :U 148 ]
 [e [\ -> _order `i , $ -> 22 `i 149
- , $ -> 66 `i 152
- 155 ]
+ , $ -> 66 `i 153
+ 157 ]
 [e :U 147 ]
-"83
-[; ;MasterMain.c: 83:     }
+"89
+[; ;MasterMain.c: 89:     }
 }
 [e :U 143 ]
 [e $U 144  ]
 [e :U 145 ]
-"84
-[; ;MasterMain.c: 84:     return;
+"90
+[; ;MasterMain.c: 90:     return;
 [e $UE 142  ]
-"85
-[; ;MasterMain.c: 85: }
+"91
+[; ;MasterMain.c: 91: }
 [e :UE 142 ]
 }

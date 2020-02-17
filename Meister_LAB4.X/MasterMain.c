@@ -46,10 +46,10 @@ void main(void) {
         }
 //        PORTB = recibido_pot1;
         uartTX_Write(recibido_pot1);
-        uartTX_Write(',');
+        //uartTX_Write(',');
 //        __delay_ms(69);
         uartTX_Write(recibido_pot2);
-        uartTX_Write('\n');
+        //uartTX_Write('\n');
         switch(order){
             case 22:  //pedir pot1
                 if (!bandera_enviar){
@@ -59,6 +59,9 @@ void main(void) {
                 }
                 if(BF){
                     recibido_pot1 = SSPBUF;
+                    if (recibido_pot1 == 10){
+                        recibido_pot1 = 9;
+                    }
                     order = 66;
                     bandera_enviar = 0;
                 }
@@ -71,6 +74,9 @@ void main(void) {
                 }
                 if(BF){
                     recibido_pot2 = SSPBUF;
+                    if (recibido_pot2 == 10){
+                        recibido_pot2 = 9;
+                    }
                     order = 22;
                     bandera_enviar = 0;
                 }

@@ -199,7 +199,7 @@ SPI_ACTIVE_TO_IDLE 64
 "36
 [v _main main `(v  1 e 1 0 ]
 {
-"85
+"91
 } 0
 "13 C:\Users\jotas\OneDrive\Documents\U\séptimo semestre\Digital 2\DIGITAL2_LAB4\DIGITAL2_LAB4\Meister_LAB4.X\UART.c
 [v _uart_init uart_init `(uc  1 e 1 0 ]

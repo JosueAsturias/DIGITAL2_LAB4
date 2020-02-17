@@ -7,11 +7,11 @@ import sys
 voltaje2 = 0
 voltaje1 = 0
 #----------------------------------------------------------------
-puerto = 'COM3'
+puerto = 'COM5'
 ser = serial.Serial(port = puerto, baudrate = 300,
                     parity = serial.PARITY_EVEN,
                     stopbits = serial.STOPBITS_ONE,
-                    bytesize = serial.EIGHTBITS, timeout = 1)
+                    bytesize = serial.EIGHTBITS, timeout = 0)
 #-----------------------------------------------------------------
 color_fondo = '#DCDCDC'
 numero = 0
@@ -29,7 +29,7 @@ def rep1():
             ser.write(numero)
             ser.flushOutput()
             ventana.update()
-            time.sleep(0.9)
+            time.sleep(1.6)
         else:
             print('el numero debe estar entre 0-255')
     except TypeError:
@@ -46,7 +46,7 @@ ventana.config(bg=color_fondo)
 #------------------labels-------------------
 entrada = Entry(ventana,width = 5)
 entrada.place(x=67, y=53)
-nombre1 = Label(ventana, text="Incrementar/decrementar contador",background = color_fondo, font=('Times', 12)).place(x=25,y=10)
+nombre1 = Label(ventana, text="LAB4-17262",background = color_fondo, font=('Times', 12)).place(x=25,y=10)
 V1 = Label(ventana, text="Sensor 1", background = color_fondo, font =('Times', 8)).place(x=40,y=140)
 valor_V1 = Label(ventana, text=str(voltaje1), background = color_fondo, font =('Times', 12))
 valor_V1.place(x=40,y=170)
@@ -63,26 +63,30 @@ repro1 = Button(ventana, command=rep1, text = "Enviar", height= 1, width = 10, b
 while True:
 
     dato = ser.read()
-    try:
+    
+    try: 
         if dato == '':
             pass
         else:
             dato1 = ser.read()
+            #ser.flushOutput()
             dato2 = ser.read()
+            valor1 = ord(dato1)
+            valor2 = ord(dato2)
+            print(str(valor1) + ',' + str(valor2))
             ser.flushInput()
-            time.sleep(0.3)                                     
+            voltaje1 = float(valor1 / float(51))
+            voltaje2 = float(valor2/float(51))
+            valor_V1.config(text = str(voltaje1)[0:4])
+            valor_V2.config(text = str(voltaje2)[0:4])
+            time.sleep(0.69)                                     
     except:
         print('.')
-    print (dato1)
-    valor1 = ord(dato1)
-    valor2 = ord(dato2)
-    voltaje1 = float(valor1 * 5 / 255)
-    voltaje2 = float(valor2*5/255)
-    valor_V1.config(text = str(voltaje1)[0:4])
-    valor_V2.config(text = str(voltaje2)[0:4])
+
+    
     ventana.update_idletasks()
     ventana.update()
-    time.sleep(0.09)
+
 
     
 ventana.mainloop()    
